@@ -4,9 +4,9 @@ import { redirect } from "next/navigation";
 import { ProductForm } from "./ui/ProductForm";
 
 interface Props {
-  readonly params: {
+  readonly params: Promise<{
     readonly slug: string;
-  };
+  }>;
 }
 export default async function Page({ params }: Props) {
   const resolvedSearchParams = await params;
@@ -17,7 +17,7 @@ export default async function Page({ params }: Props) {
     getCategories(),
   ]);
 
-  if (!product && slug !== 'new') {
+  if (!product && slug !== "new") {
     redirect("/admin/products/");
   }
 
